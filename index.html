@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mở Gói Quà</title>
+    <title>Mở Gói Quà với Pháo Hoa</title>
     <style>
         body {
             display: flex;
@@ -12,6 +12,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f3f4f6;
+            overflow: hidden;
         }
 
         .gift-box {
@@ -55,6 +56,21 @@
         .open .gift-box {
             transform: translateY(-20px);
         }
+
+        /* Pháo hoa */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #ffdd55, #ff0044);
+            border-radius: 50%;
+            animation: explode 0.8s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -69,10 +85,38 @@
 <script>
     function openGift() {
         const giftBox = document.getElementById("giftBox");
-        const lid = document.getElementById("lid");
-        const giftContent = document.getElementById("giftContent");
-
         giftBox.classList.toggle("open");
+
+        if (giftBox.classList.contains("open")) {
+            createFireworks();
+        }
+    }
+
+    function createFireworks() {
+        const fireworkContainer = document.createElement("div");
+        fireworkContainer.style.position = "absolute";
+        fireworkContainer.style.top = "50%";
+        fireworkContainer.style.left = "50%";
+        fireworkContainer.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(fireworkContainer);
+
+        for (let i = 0; i < 20; i++) {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+
+            // Tạo hiệu ứng ngẫu nhiên cho pháo hoa
+            firework.style.left = `${Math.random() * 200 - 100}px`;
+            firework.style.top = `${Math.random() * 200 - 100}px`;
+            firework.style.animationDelay = `${Math.random() * 0.5}s`;
+            
+            fireworkContainer.appendChild(firework);
+            
+            // Xóa pháo hoa sau khi hoàn thành
+            setTimeout(() => firework.remove(), 800);
+        }
+
+        // Xóa container pháo hoa sau khi hoàn thành
+        setTimeout(() => fireworkContainer.remove(), 800);
     }
 </script>
 
