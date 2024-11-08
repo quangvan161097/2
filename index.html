@@ -3,53 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Web Cơ Bản</title>
+    <title>Mở Gói Quà</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f3f4f6;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
+
+        .gift-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background-color: #FF6B6B;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.4s ease;
+        }
+
+        .lid {
+            position: absolute;
+            width: 160px;
+            height: 20px;
+            background-color: #ff4b4b;
+            top: -10px;
+            transition: transform 0.4s ease;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .gift-content {
+            display: none;
+            color: white;
+            font-size: 1.5em;
             text-align: center;
         }
-        main {
-            padding: 20px;
+
+        .open .gift-content {
+            display: block;
         }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+
+        .open .lid {
+            transform: rotateX(180deg);
+        }
+
+        .open .gift-box {
+            transform: translateY(-20px);
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Chào mừng đến với trang web của tôi!</h1>
-    </header>
 
-    <main>
-        <section>
-            <h2>Giới thiệu</h2>
-            <p>Đây là một trang web cơ bản được tạo bằng HTML và CSS. Trang này có một phần tiêu đề, nội dung chính và chân trang.</p>
-        </section>
+<div class="gift-container" onclick="openGift()">
+    <div class="gift-box" id="giftBox">
+        <div class="lid" id="lid"></div>
+        <div class="gift-content" id="giftContent">🎉 Surprise! 🎉</div>
+    </div>
+</div>
 
-        <section>
-            <h2>Dịch vụ</h2>
-            <p>Chúng tôi cung cấp các dịch vụ như thiết kế web, phát triển ứng dụng và tư vấn công nghệ.</p>
-        </section>
-    </main>
+<script>
+    function openGift() {
+        const giftBox = document.getElementById("giftBox");
+        const lid = document.getElementById("lid");
+        const giftContent = document.getElementById("giftContent");
 
-    <footer>
-        <p>&copy; 2024 Công Ty Của Tôi</p>
-    </footer>
+        giftBox.classList.toggle("open");
+    }
+</script>
+
 </body>
 </html>
